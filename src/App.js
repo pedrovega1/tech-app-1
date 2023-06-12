@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import SearchBar from './components/SearchPost.js';
+import Navbar from './components/Navbar';
+import PostList from './components/PostList';
+import About from './components/About';
+import UserDetails from './components/UserDetails';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="flex-1 mx-auto p-6">
+          <Routes>
+            <Route path="/" element={<PostList />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/posts/:userId" element={<UserDetails />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
